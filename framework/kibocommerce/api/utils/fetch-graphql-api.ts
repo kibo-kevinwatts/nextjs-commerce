@@ -14,6 +14,9 @@ const fetchGraphqlApi: (
   const config = getConfig()
   const authHelper = new APIAuthenticationHelper(config);
   const apiToken = await authHelper.getAccessToken();
+  if(!apiToken){
+    console.warn(`no api token!!`);
+  }
   const res = await fetch(config.commerceUrl + (preview ? '/preview' : ''), {
     ...fetchOptions,
     method: 'POST',
@@ -29,8 +32,9 @@ const fetchGraphqlApi: (
   })
 
   const json = await res.json()
+  console.log(json);
   if (json.errors) {
-    console.warn(`Kibo API Request Correlation ID: ${res.headers.get('x-vol-correlation')}`);
+    console.error(`Kibo API Request Correlation ID: ${res.headers.get('x-vol-correlation')}`);
     throw new FetcherError({
       errors: json.errors ?? [{ message: 'Failed to fetch KiboCommerce API' }],
       status: res.status,

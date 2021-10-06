@@ -68,11 +68,15 @@ export class APIAuthenticationHelper {
       client_secret: this._sharedSecret,
       grant_type: 'client_credentials',
     })
+    console.log(`perform app auth here: ${this._authUrl}/api/platform/applications/authtickets/oauth`);
+    console.log(`auth body:${JSON.stringify(options)}`);
+
     // perform authentication
     const authTicket = await fetch(
       `${this._authUrl}/api/platform/applications/authtickets/oauth`,
       options
     ).then((response) => response.json())
+    console.log(`auth response`, JSON.stringify(authTicket))
     // set expiration time in ms on auth ticket
     this._calculateTicketExpiration(authTicket)
     // set authentication ticket on next server runtime object

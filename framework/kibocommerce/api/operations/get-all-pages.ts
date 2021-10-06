@@ -28,7 +28,7 @@ export default function getAllPagesOperation({
     }
     const { data } = await cfg.fetch(query, { variables });
 
-    const pages = data.documentListDocuments.items.map((page: any) => {
+    const pages = data?.documentListDocuments?.items?.map((page: any) => {
       return {
         id: page.id,
         name: page.name.charAt(0).toUpperCase() + page.name.slice(1),
@@ -37,7 +37,7 @@ export default function getAllPagesOperation({
         is_visible: page.properties.is_visible,
         sort_order: page.properties.sort_order
       }
-    });
+    }) || [];
 
     return { pages }
   }

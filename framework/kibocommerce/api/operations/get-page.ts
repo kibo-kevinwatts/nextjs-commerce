@@ -28,7 +28,7 @@ export default function getPageOperation({
 
     const { data } = await cfg.fetch(getPageQuery, { variables: pageVariables })
 
-    const firstPage = data.documentListDocuments.items?.[0].properties;
+    const firstPage = data?.documentListDocuments?.items?.[0].properties;
     const page = firstPage as Page
 
     if (preview || page?.is_visible) {

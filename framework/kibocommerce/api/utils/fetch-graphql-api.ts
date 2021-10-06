@@ -12,6 +12,7 @@ const fetchGraphqlApi: (
   fetchOptions
 ) => {
   const config = getConfig()
+  console.log(`the config: `, JSON.stringify(config));
   const authHelper = new APIAuthenticationHelper(config);
   const apiToken = await authHelper.getAccessToken();
   if(!apiToken){

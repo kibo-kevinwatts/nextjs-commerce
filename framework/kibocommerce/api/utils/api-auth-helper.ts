@@ -38,8 +38,10 @@ export class APIAuthenticationHelper {
     { clientId = '', sharedSecret = '', authUrl = '' }: KiboCommerceConfig,
     authTicketCache?: AuthTicketCache
   ) {
-    this._clientId = clientId
-    this._sharedSecret = sharedSecret
+    console.log(`ENV Client ID at Api Auth Helper ${process.env.KIBO_CLIENT_ID}`);
+    console.log(`ENV Shared Secret at Api Auth Helper ${process.env.KIBO_SHARED_SECRET}`)
+    this._clientId = clientId; 
+    this._sharedSecret = sharedSecret;
     this._authUrl = authUrl
     if(!authTicketCache) {
       this._authTicketCache = new RuntimeMemCache();
